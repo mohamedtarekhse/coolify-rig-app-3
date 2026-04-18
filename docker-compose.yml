@@ -4,8 +4,8 @@ services:
   # MySQL Database
   mysql:
     build:
-      context: ..
-      dockerfile: docker/Dockerfile.mysql
+      context: .
+      dockerfile: Dockerfile.mysql
     container_name: rigways-mysql
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootpassword}
@@ -16,7 +16,7 @@ services:
       - "3306:3306"
     volumes:
       - mysql_data:/var/lib/mysql
-      - ../sql:/docker-entrypoint-initdb.d
+      - ./sql:/docker-entrypoint-initdb.d
     networks:
       - rigways-network
     healthcheck:
@@ -28,8 +28,8 @@ services:
   # Node.js Backend API
   backend:
     build:
-      context: ..
-      dockerfile: docker/Dockerfile.backend
+      context: .
+      dockerfile: Dockerfile
     container_name: rigways-backend
     environment:
       NODE_ENV: production
