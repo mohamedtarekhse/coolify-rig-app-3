@@ -55,6 +55,20 @@ services:
       - rigways-network
     restart: unless-stopped
 
+  # React Frontend (SAP Fiori Style)
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    container_name: rigways-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - rigways-network
+    restart: unless-stopped
+
 volumes:
   mysql_data:
     driver: local
